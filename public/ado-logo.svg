@@ -1,0 +1,12 @@
+<svg width="640" height="220" viewBox="0 0 640 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="220" fill="transparent"/>
+  <g>
+    <text x="8" y="105" font-family="Arial Black, Montserrat, sans-serif" font-size="98" font-weight="900" fill="#F7F3E7" letter-spacing="-4">AD</text>
+    <g transform="translate(348 19)">
+      <path d="M60 9C85 9 91 23 122 23C153 23 159 9 184 9C230 9 250 45 246 96C242 144 212 183 177 183C144 183 151 130 123 130C95 130 102 183 69 183C34 183 4 144 0 96C-4 45 14 9 60 9Z" stroke="#9A830A" stroke-width="18" stroke-linecap="round"/>
+      <path d="M63 43C84 43 91 55 123 55C154 55 162 43 182 43C208 43 222 66 219 97C215 131 194 158 177 158C158 158 163 103 124 103C85 103 89 158 70 158C53 158 32 131 28 97C25 66 37 43 63 43Z" fill="#F6F0BD"/>
+      <path d="M58 49C82 49 88 64 123 64C144 64 159 58 171 52C158 68 137 74 123 74C98 74 90 62 69 62C53 62 43 76 45 103C37 92 35 77 38 66C41 55 48 49 58 49Z" fill="#151515" opacity="0.78"/>
+    </g>
+    <text x="12" y="168" font-family="Arial, Montserrat, sans-serif" font-size="44" font-weight="800" fill="#F7F3E7" letter-spacing="0">Academia Digital</text>
+  </g>
+</svg>
