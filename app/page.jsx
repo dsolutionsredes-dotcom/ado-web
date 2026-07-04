@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const whatsappNumber = '000000000';
 const waBase = `https://wa.me/${whatsappNumber}`;
@@ -71,10 +71,27 @@ function SectionTitle({ label, title, center=false }) {
 
 export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
   const year = useMemo(() => new Date().getFullYear(), []);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setShowLoader(false);
+    }, 1800);
+
+    return () => window.clearTimeout(timer);
+  }, []);
 
   return (
     <main className="page-shell">
+      <div className={`splash-screen ${showLoader ? '' : 'is-hidden'}`} aria-hidden={!showLoader}>
+        <div className="splash-card">
+          <Image src="/assets/logo-ado.png" alt="ADO Academia Digital" width={260} height={96} priority />
+          <div className="splash-line" />
+          <p>Formación avanzada en odontología digital</p>
+        </div>
+      </div>
+
       <div className="tooth-bg tooth-bg-one" />
       <div className="tooth-bg tooth-bg-two" />
 

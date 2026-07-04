@@ -35,3 +35,11 @@ Ajustes extra en v7:
 - tipografías del hero más moderadas
 - espaciados más equilibrados
 - mismas imágenes de alta calidad ubicadas en cada sección
+
+
+## v8
+
+- Pantalla de carga inicial con logo ADO.
+- Duración aproximada: 1.8 segundos.
+- Entrada suave hacia la landing.
+- Dockerfile limpio sin package-lock para evitar caché de dependencias en EasyPanel.
