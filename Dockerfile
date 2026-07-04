@@ -2,12 +2,14 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+COPY package.json package-lock.json* ./
+
+ARG GIT_SHA=unknown
+RUN echo "Build cache bust: $GIT_SHA" && npm install && npm install next@14.2.20 react@18.3.1 react-dom@18.3.1
 
 COPY . .
 
-RUN ./node_modules/.bin/next build
+RUN npx next build
 
 FROM node:20-alpine AS runner
 
@@ -24,4 +26,4 @@ COPY --from=builder /app/.next ./.next
 
 EXPOSE 80
 
-CMD ["./node_modules/.bin/next", "start", "-p", "80", "-H", "0.0.0.0"]
+CMD ["npx", "next", "start", "-p", "80", "-H", "0.0.0.0"]
