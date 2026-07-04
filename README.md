@@ -1,28 +1,36 @@
-# ADO Academia Digital - v3
+# ADO Academia Digital - v4
 
-Versión más cercana al mockup solicitado para una landing académica de cursos.
+Versión v4 de la landing informativa para ADO Academia Digital.
 
-## Características
-- diseño premium alineado al mockup enviado
-- enfoque visual de academia / escuela de cursos
-- secciones informativas para captación de alumnos
-- imágenes ya integradas en `public/assets`
-- botones dirigidos a WhatsApp
-- formulario visual sin backend
-- Dockerfile listo para EasyPanel
+## Incluye
 
-## Cambiar número de WhatsApp
-Editar en `app/page.jsx`:
+- Diseño más claro, médico, educativo y moderno.
+- Secciones con tonos diferentes para mejor contraste.
+- Logo integrado como elemento CSS para evitar la caja blanca del logo original.
+- Fondo animado sutil con formas dentales abstractas.
+- Imágenes integradas en `public/assets`.
+- Responsive real para móvil.
+- Formulario visual sin envío real.
+- Botones conectados a WhatsApp.
+- Dockerfile listo para EasyPanel.
+
+## Cambiar WhatsApp
+
+En `app/page.jsx`, cambiar:
 
 ```js
 const whatsappNumber = '000000000';
 ```
 
+por el número real en formato internacional, sin `+`.
+
 ## Desarrollo local
+
 ```bash
 npm install
 npm run dev
 ```
 
-## Deploy
-Subir el proyecto a GitHub y desplegar con Dockerfile en EasyPanel.
+## Despliegue
+
+Subir a GitHub y desplegar en EasyPanel usando Dockerfile.
