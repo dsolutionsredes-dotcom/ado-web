@@ -24,3 +24,4 @@ COPY --from=builder /app/.next ./.next
 EXPOSE 80
 
 CMD ["npm", "run", "start"]
+
