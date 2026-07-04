@@ -1,8 +1,8 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'ADO Academia Digital | Formación avanzada en odontología digital',
-  description: 'Academia especializada en odontología digital, ortodoncia, implantes, endodoncia y estética dental.',
+  title: 'ADO Academia Digital',
+  description: 'Landing informativa para cursos de odontología digital.',
 };
 
 export default function RootLayout({ children }) {
