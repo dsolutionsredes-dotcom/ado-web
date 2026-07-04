@@ -1,343 +1,308 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import {
-  Award,
-  BookOpen,
-  Box,
-  CalendarDays,
-  CheckCircle2,
-  Clock3,
-  Facebook,
-  GraduationCap,
-  Instagram,
-  Mail,
-  MapPin,
-  Menu,
-  MessageCircle,
-  Monitor,
-  Send,
-  ShieldCheck,
-  Sparkles,
-  Target,
-  Users,
-  Workflow,
-  X,
-  Youtube,
-} from 'lucide-react';
+import { useMemo, useState } from 'react';
 
 const whatsappNumber = '000000000';
-const whatsappLink = (message) => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-
-const navItems = [
-  { label: 'Inicio', href: '#inicio' },
-  { label: 'Nosotros', href: '#nosotros' },
-  { label: 'Cursos', href: '#cursos' },
-  { label: 'Metodología', href: '#metodologia' },
-  { label: 'Próximos cursos', href: '#proximos' },
-  { label: 'Contacto', href: '#contacto' },
-];
-
-const heroBadges = [
-  { title: 'Formación especializada', icon: GraduationCap },
-  { title: 'Tecnología de vanguardia', icon: Monitor },
-  { title: 'Docentes expertos', icon: Users },
-  { title: 'Certificación reconocida', icon: Award },
-];
+const waBase = `https://wa.me/${whatsappNumber}`;
 
 const courses = [
   {
     title: 'Ortodoncia Digital',
-    image: '/assets/course-ortodoncia.jpg',
-    icon: Workflow,
-    text: 'Aprende planificación, diagnóstico y aplicación de técnicas modernas para tratamientos más precisos y eficientes.',
+    description: 'Aprende planificación, diagnóstico y aplicación de técnicas modernas para tratamientos ortodónticos más precisos y eficientes.',
+    image: '/assets/curso-ortodoncia.png',
+    icon: '⎯⎯⎯'
   },
   {
     title: 'Implantes Dentales',
-    image: '/assets/course-implantes.jpg',
-    icon: ShieldCheck,
-    text: 'Formación integral en implantología y proyectos sobre implantes con protocolos de planificación digital avanzada.',
+    description: 'Formación integral en implantología y procedimientos quirúrgicos y protésicos con planificación digital avanzada.',
+    image: '/assets/curso-implantes.png',
+    icon: '◔'
   },
   {
     title: 'Endodoncia',
-    image: '/assets/course-endodoncia.jpg',
-    icon: ShieldCheck,
-    text: 'Capacitación práctica para mejorar diagnóstico, manejo clínico y tratamiento endodóntico con criterios actuales.',
+    description: 'Capacitación práctica para mejorar el diagnóstico, manejo clínico y tratamiento endodóntico con criterios actuales.',
+    image: '/assets/curso-endodoncia.png',
+    icon: '⌇'
   },
   {
     title: 'Estética Dental',
-    image: '/assets/course-estetica.jpg',
-    icon: Sparkles,
-    text: 'Desarrolla habilidades en rehabilitación estética, diseño de sonrisa y procedimientos orientados a resultados naturales.',
-  },
+    description: 'Desarrolla habilidades en rehabilitación estética, diseño de sonrisa y procedimientos orientados a resultados naturales y armónicos.',
+    image: '/assets/curso-estetica.png',
+    icon: '✦'
+  }
 ];
 
 const methodology = [
-  { title: 'Teoría aplicada', text: 'Clases claras y estructuradas con enfoque en la práctica clínica real.', icon: Box },
-  { title: 'Prácticas guiadas', text: 'Aprendizaje paso a paso con acompañamiento de docentes especializados.', icon: ShieldCheck },
-  { title: 'Casos clínicos', text: 'Análisis y resolución de casos reales o simulados para fortalecer competencias.', icon: Target },
-  { title: 'Tecnología digital', text: 'Uso de herramientas y equipos digitales de última generación.', icon: Monitor },
-  { title: 'Certificación', text: 'Constancia de participación y respaldo de formación profesional.', icon: CheckCircle2 },
+  ['Teoría aplicada', 'Clases claras y estructuradas con enfoque en la práctica clínica real.'],
+  ['Prácticas guiadas', 'Aprendizaje paso a paso con acompañamiento de docentes especialistas.'],
+  ['Casos clínicos', 'Análisis y resolución de casos reales o simulados para fortalecer competencias.'],
+  ['Tecnología digital', 'Uso de herramientas y equipos digitales de última generación.'],
+  ['Certificación', 'Constancia de participación que respalda tu formación profesional.']
 ];
 
-const schedule = [
-  { course: 'Ortodoncia Digital', date: '15 - 17 Jun 2026', mode: 'Presencial', status: 'Cupos limitados' },
-  { course: 'Implantes Dentales', date: '20 - 22 Jul 2026', mode: 'Presencial', status: 'Inscripciones abiertas' },
-  { course: 'Endodoncia', date: '10 - 12 Ago 2026', mode: 'Presencial', status: 'Cupos limitados' },
-  { course: 'Estética Dental', date: '14 - 16 Sep 2026', mode: 'Presencial', status: 'Inscripciones abiertas' },
+const reasons = [
+  ['Formación de calidad', 'Programas diseñados por especialistas con experiencia clínica y académica.'],
+  ['Tecnología avanzada', 'Equipos y herramientas digitales de alto nivel.'],
+  ['Aprendizaje práctico', 'Enfoque en la aplicación real de los conocimientos.'],
+  ['Para todos los niveles', 'Dirigido a estudiantes, odontólogos y profesionales interesados en especializarse.'],
+  ['Actualización constante', 'Contenido actualizado según las últimas tendencias y avances en odontología.']
 ];
 
-const benefits = [
-  { title: 'Formación de calidad', text: 'Programas diseñados por especialistas con experiencia clínica y académica.', icon: Award },
-  { title: 'Tecnología avanzada', text: 'Equipos y herramientas digitales para una formación actualizada.', icon: Monitor },
-  { title: 'Aprendizaje práctico', text: 'Enfoque en la aplicación real de los conocimientos.', icon: Users },
-  { title: 'Para todos los niveles', text: 'Dirigido a estudiantes, odontólogos y profesionales interesados en especializarse.', icon: GraduationCap },
-  { title: 'Actualización constante', text: 'Contenido actualizado según las últimas tendencias y avances en odontología.', icon: Clock3 },
+const dates = [
+  ['Ortodoncia Digital', '15 - 17 Jun 2025', 'Presencial', 'Cupos limitados'],
+  ['Implantes Dentales', '20 - 22 Jul 2025', 'Presencial', 'Inscripciones abiertas'],
+  ['Endodoncia', '10 - 12 Ago 2025', 'Presencial', 'Cupos limitados'],
+  ['Estética Dental', '14 - 16 Sep 2025', 'Presencial', 'Inscripciones abiertas']
 ];
 
-function Logo() {
+function whatsappLink(message) {
+  return `${waBase}?text=${encodeURIComponent(message)}`;
+}
+
+function SectionTitle({ label, title, center=false }) {
   return (
-    <a className="logo" href="#inicio" aria-label="ADO Academia Digital">
-      <Image src="/assets/ado-logo-transparent.png" alt="ADO Academia Digital" width={220} height={116} priority />
-    </a>
+    <div className={center ? 'section-head center' : 'section-head'}>
+      <span>{label}</span>
+      {title ? <h2>{title}</h2> : null}
+    </div>
   );
 }
 
-function Reveal({ children, className = '', delay = 0 }) {
-  return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: 26 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.7, delay, ease: 'easeOut' }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-export default function Home() {
+export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const year = useMemo(() => new Date().getFullYear(), []);
 
   return (
-    <main>
-      <div className="dental-texture" />
-      <div className="tooth-watermark tooth-one" />
-      <div className="tooth-watermark tooth-two" />
+    <main className="page-shell">
+      <div className="tooth-bg tooth-bg-one" />
+      <div className="tooth-bg tooth-bg-two" />
 
-      <section id="inicio" className="hero-section">
-        <header className="header">
-          <div className="container header-grid">
-            <Logo />
-            <nav className={`nav ${menuOpen ? 'is-open' : ''}`}>
-              {navItems.map((item) => (
-                <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)}>{item.label}</a>
-              ))}
-            </nav>
-            <a className="header-button" href={whatsappLink('Hola, deseo solicitar información sobre ADO Academia Digital.')} target="_blank" rel="noreferrer">
-              <MessageCircle size={16} /> Solicitar información
-            </a>
-            <button className="mobile-menu" aria-label="Abrir menú" onClick={() => setMenuOpen(!menuOpen)}>
-              {menuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </header>
+      <header className="topbar">
+        <div className="container nav-wrap">
+          <a href="#inicio" className="brand">
+            <Image src="/assets/logo-ado.png" alt="ADO Academia Digital" width={210} height={72} priority />
+          </a>
 
+          <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Abrir menú">
+            <span />
+            <span />
+            <span />
+          </button>
+
+          <nav className={`main-nav ${menuOpen ? 'open' : ''}`}>
+            <a href="#inicio" onClick={() => setMenuOpen(false)}>Inicio</a>
+            <a href="#nosotros" onClick={() => setMenuOpen(false)}>Nosotros</a>
+            <a href="#cursos" onClick={() => setMenuOpen(false)}>Cursos</a>
+            <a href="#metodologia" onClick={() => setMenuOpen(false)}>Metodología</a>
+            <a href="#fechas" onClick={() => setMenuOpen(false)}>Próximos cursos</a>
+            <a href="#contacto" onClick={() => setMenuOpen(false)}>Contacto</a>
+          </nav>
+
+          <a className="cta cta-solid desktop-cta" href={whatsappLink('Hola, deseo solicitar información sobre ADO Academia Digital')}>
+            Solicitar información
+          </a>
+        </div>
+      </header>
+
+      <section id="inicio" className="hero section-pad">
         <div className="container hero-grid">
-          <Reveal className="hero-copy">
-            <span className="eyebrow">Aprende. Practica. Transforma.</span>
-            <h1>Formación avanzada en odontología digital <strong>para el futuro profesional.</strong></h1>
-            <p>Programas especializados, tecnología de vanguardia y metodologías prácticas para llevar tu carrera al siguiente nivel.</p>
+          <div className="hero-copy">
+            <p className="eyebrow">Aprende. Practica. Transforma.</p>
+            <h1>
+              Formación avanzada en odontología digital <span>para el futuro profesional.</span>
+            </h1>
+            <p className="hero-text">
+              Programas especializados, tecnología de vanguardia y metodologías prácticas para llevar tu carrera al siguiente nivel.
+            </p>
             <div className="hero-actions">
-              <a className="btn btn-primary" href={whatsappLink('Hola, quiero recibir información sobre los cursos de ADO Academia Digital.')} target="_blank" rel="noreferrer">
-                <MessageCircle size={16} /> Solicitar información
-              </a>
-              <a className="btn btn-outline" href="#cursos">Ver cursos</a>
+              <a className="cta cta-solid" href={whatsappLink('Hola, quiero solicitar información sobre los cursos de ADO Academia Digital')}>Solicitar información</a>
+              <a className="cta cta-outline" href="#cursos">Ver cursos</a>
             </div>
-            <div className="hero-badges">
-              {heroBadges.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <div key={item.title} className="hero-badge">
-                    <Icon size={22} />
-                    <span>{item.title}</span>
-                  </div>
-                );
-              })}
+            <div className="hero-features">
+              <div><strong>Formación</strong><span>especializada</span></div>
+              <div><strong>Tecnología</strong><span>de vanguardia</span></div>
+              <div><strong>Docentes</strong><span>expertos</span></div>
+              <div><strong>Certificación</strong><span>reconocida</span></div>
             </div>
-          </Reveal>
-          <Reveal className="hero-image-wrap" delay={0.1}>
-            <div className="hero-image-card">
-              <Image src="/assets/hero-main.jpg" alt="Tecnología dental digital" fill className="cover-img" priority />
-            </div>
-          </Reveal>
-        </div>
-      </section>
+          </div>
 
-      <section id="nosotros" className="about-section section-contrast">
-        <div className="container about-grid">
-          <Reveal className="about-image-card">
-            <Image src="/assets/about-main.jpg" alt="Sesión práctica de odontología" fill className="cover-img" />
-          </Reveal>
-          <Reveal className="about-copy" delay={0.06}>
-            <span className="eyebrow">Sobre ADO</span>
-            <h2>Academia Digital</h2>
-            <p>En ADO Academia Digital formamos profesionales y futuros especialistas de la odontología mediante programas actualizados, prácticos y enfocados en la aplicación clínica real.</p>
-            <p>Integramos conocimiento avanzado, tecnología digital y metodologías modernas para que cada alumno desarrolle habilidades precisas, seguras y eficaces en el área odontológica.</p>
-          </Reveal>
-          <Reveal className="mission-stack" delay={0.1}>
-            <div className="info-card">
-              <Target size={24} />
-              <div>
-                <h3>Misión</h3>
-                <p>Formar y capacitar a profesionales de la odontología con conocimientos avanzados en tecnología digital, ofreciendo cursos especializados.</p>
-              </div>
+          <div className="hero-visual">
+            <div className="hero-image-blend">
+              <Image src="/assets/hero-digital.png" alt="Tecnología digital dental" fill sizes="(max-width: 900px) 100vw, 48vw" priority />
             </div>
-            <div className="info-card">
-              <Sparkles size={24} />
-              <div>
-                <h3>Visión</h3>
-                <p>Ser la academia de referencia líder en odontología digital, reconocida por la calidad de su enseñanza y actualización constante.</p>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section id="cursos" className="courses-section">
-        <div className="container">
-          <Reveal className="section-title centered">
-            <span className="divider-label">Áreas de formación</span>
-          </Reveal>
-          <div className="courses-grid">
-            {courses.map((course, index) => {
-              const Icon = course.icon;
-              return (
-                <Reveal key={course.title} className="course-card" delay={index * 0.05}>
-                  <div className="course-image">
-                    <Image src={course.image} alt={course.title} fill className="cover-img" />
-                  </div>
-                  <div className="course-icon"><Icon size={22} /></div>
-                  <div className="course-body">
-                    <h3>{course.title}</h3>
-                    <p>{course.text}</p>
-                    <a href={whatsappLink(`Hola, deseo recibir información sobre ${course.title}.`)} target="_blank" rel="noreferrer">Ver curso <span>→</span></a>
-                  </div>
-                </Reveal>
-              );
-            })}
           </div>
         </div>
       </section>
 
-      <section id="metodologia" className="method-section">
-        <div className="container">
-          <Reveal className="method-panel">
-            <span>Nuestra metodología</span>
-            <div className="method-grid">
-              {methodology.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <div className="method-item" key={item.title}>
-                    <Icon size={30} />
-                    <h3>{item.title}</h3>
-                    <p>{item.text}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </Reveal>
+      <section id="nosotros" className="about section-pad-sm">
+        <div className="container about-grid">
+          <div className="about-image card-soft">
+            <Image src="/assets/about-ado.png" alt="Clase práctica de odontología" width={900} height={680} />
+          </div>
+
+          <div className="about-copy">
+            <SectionTitle label="Sobre ADO" title="Academia Digital" />
+            <p>
+              En ADO Academia Digital formamos profesionales y futuros especialistas de la odontología mediante programas actualizados, prácticos y enfocados en la aplicación clínica real.
+            </p>
+            <p>
+              Integramos conocimiento avanzado, tecnología digital y metodologías modernas para que cada alumno desarrolle habilidades precisas, seguras y eficaces en el área odontológica.
+            </p>
+          </div>
+
+          <div className="mission-stack">
+            <article className="info-card">
+              <h3>Misión</h3>
+              <p>Formar y capacitar a profesionales de la odontología con conocimientos avanzados en tecnología digital, ofreciendo cursos especializados en Ortodoncia, Implantes, Endodoncia y Estética Dental.</p>
+            </article>
+            <article className="info-card">
+              <h3>Visión</h3>
+              <p>Ser la academia de referencia líder en odontología digital en la región, reconocida por la calidad de su enseñanza, la actualización constante y la integración de las últimas tecnologías.</p>
+            </article>
+          </div>
         </div>
       </section>
 
-      <section id="proximos" className="next-section">
-        <div className="container next-grid">
-          <Reveal className="schedule-card">
-            <span className="eyebrow">Próximas fechas</span>
-            <div className="schedule-table">
-              <div className="schedule-head"><span>Curso</span><span>Fecha</span><span>Modalidad</span><span>Estado</span></div>
-              {schedule.map((row) => (
-                <div className="schedule-row" key={row.course}>
-                  <span>{row.course}</span>
-                  <span>{row.date}</span>
-                  <span>{row.mode}</span>
-                  <strong className={row.status.includes('abiertas') ? 'open' : 'limited'}>{row.status}</strong>
+      <section id="cursos" className="courses section-pad-sm">
+        <div className="container">
+          <SectionTitle label="Áreas de formación" center />
+          <div className="course-grid">
+            {courses.map((course) => (
+              <article className="course-card" key={course.title}>
+                <div className="course-image">
+                  <Image src={course.image} alt={course.title} width={800} height={600} />
+                </div>
+                <div className="course-icon">{course.icon}</div>
+                <div className="course-body">
+                  <h3>{course.title}</h3>
+                  <p>{course.description}</p>
+                  <a href={whatsappLink(`Hola, deseo información sobre el curso de ${course.title}`)}>Ver curso</a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="metodologia" className="method section-pad-sm">
+        <div className="container">
+          <SectionTitle label="Nuestra metodología" title="Aprendizaje que transforma" center />
+          <div className="method-grid">
+            {methodology.map(([title, text]) => (
+              <article className="method-card" key={title}>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="two-col section-pad-sm">
+        <div className="container two-col-grid">
+          <div id="fechas" className="table-box">
+            <SectionTitle label="Próximas fechas" />
+            <div className="dates-table">
+              <div className="thead"><span>Curso</span><span>Fecha</span><span>Modalidad</span><span>Estado</span></div>
+              {dates.map((row) => (
+                <div className="trow" key={row[0]}>
+                  <span>{row[0]}</span>
+                  <span>{row[1]}</span>
+                  <span>{row[2]}</span>
+                  <span className={row[3].includes('abiertas') ? 'status-open' : 'status-limited'}>{row[3]}</span>
                 </div>
               ))}
             </div>
-            <a className="btn btn-whatsapp" href={whatsappLink('Hola, deseo información sobre las próximas fechas de cursos ADO.')} target="_blank" rel="noreferrer">
-              <MessageCircle size={16} /> Solicitar información por WhatsApp
-            </a>
-          </Reveal>
+            <a className="cta cta-outline wide" href={whatsappLink('Hola, quiero información sobre próximas fechas de cursos')}>Solicitar información por WhatsApp</a>
+          </div>
 
-          <Reveal className="benefits-card" delay={0.08}>
-            <span className="eyebrow">¿Por qué elegir ADO?</span>
-            <h2>Tu crecimiento es nuestra prioridad.</h2>
-            <div className="benefits-grid">
-              {benefits.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <div key={item.title} className="benefit-item">
-                    <Icon size={22} />
-                    <div>
-                      <h3>{item.title}</h3>
-                      <p>{item.text}</p>
-                    </div>
-                  </div>
-                );
-              })}
+          <div className="reasons-box">
+            <SectionTitle label="¿Por qué elegir ADO?" title="Tu crecimiento es nuestra prioridad." />
+            <div className="reasons-grid">
+              {reasons.map(([title, text]) => (
+                <article key={title}>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </article>
+              ))}
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
 
-      <section id="contacto" className="contact-section">
-        <div className="container contact-grid">
-          <Reveal className="contact-copy">
-            <span className="eyebrow">Solicita información</span>
-            <h2>Déjanos tus datos</h2>
-            <p>Completa el formulario y nuestro equipo se comunicará contigo para brindarte información sobre nuestros cursos, fechas, modalidad e inscripción.</p>
-            <p className="note">Formulario demostrativo: por ahora no envía datos. Los botones dirigen a WhatsApp.</p>
-          </Reveal>
-          <Reveal className="form-card" delay={0.06}>
-            <form>
-              <label>Nombre completo *<input type="text" placeholder="Tu nombre completo" /></label>
-              <label>WhatsApp *<input type="text" placeholder="Tu número de WhatsApp" /></label>
-              <label>Correo electrónico *<input type="email" placeholder="tucorreo@email.com" /></label>
-              <label>Curso de interés *<select><option>Selecciona un curso</option>{courses.map((course) => <option key={course.title}>{course.title}</option>)}</select></label>
-              <label className="wide">Mensaje opcional<textarea placeholder="Escribe tu mensaje" rows={3} /></label>
-              <a className="submit-button" href={whatsappLink('Hola, deseo enviar mi solicitud de información para ADO Academia Digital.')} target="_blank" rel="noreferrer"><Send size={17} /> Enviar solicitud</a>
-            </form>
-          </Reveal>
+      <section id="contacto" className="contact section-pad-sm">
+        <div className="container contact-box">
+          <div className="contact-copy">
+            <SectionTitle label="Solicita información" title="Déjanos tus datos" />
+            <p>
+              Completa el formulario y nuestro equipo se comunicará contigo para brindarte toda la información sobre nuestros cursos, fechas, modalidad e inscripción.
+            </p>
+            <p className="demo-note">Formulario demostrativo: por ahora los botones dirigen a WhatsApp.</p>
+          </div>
+
+          <form className="form-grid" action={whatsappLink('Hola, deseo más información sobre ADO Academia Digital')}>
+            <label>
+              Nombre completo *
+              <input type="text" placeholder="Tu nombre completo" />
+            </label>
+            <label>
+              WhatsApp *
+              <input type="text" placeholder="Tu número de WhatsApp" />
+            </label>
+            <label>
+              Correo electrónico *
+              <input type="email" placeholder="tucorreo@email.com" />
+            </label>
+            <label>
+              Curso de interés *
+              <select defaultValue="">
+                <option value="" disabled>Selecciona un curso</option>
+                {courses.map((course) => <option key={course.title}>{course.title}</option>)}
+              </select>
+            </label>
+            <label className="full">
+              Mensaje (opcional)
+              <textarea rows="4" placeholder="Escribe tu mensaje" />
+            </label>
+            <div className="form-action full">
+              <button className="cta cta-solid" type="submit">Enviar solicitud</button>
+            </div>
+          </form>
         </div>
       </section>
 
       <footer className="footer">
         <div className="container footer-grid">
           <div>
-            <Logo />
+            <Image src="/assets/logo-ado.png" alt="ADO Academia Digital" width={170} height={58} />
             <p>Formación avanzada en odontología digital para impulsar tu futuro profesional.</p>
-            <div className="socials"><Instagram size={18} /><Facebook size={18} /><Youtube size={18} /></div>
           </div>
           <div>
-            <h3>Enlaces rápidos</h3>
-            {navItems.map((item) => <a href={item.href} key={item.href}>{item.label}</a>)}
+            <h4>Enlaces rápidos</h4>
+            <a href="#inicio">Inicio</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#cursos">Cursos</a>
+            <a href="#metodologia">Metodología</a>
+            <a href="#contacto">Contacto</a>
           </div>
           <div>
-            <h3>Contacto</h3>
-            <p><MessageCircle size={16} /> +00 000 000 000</p>
-            <p><Mail size={16} /> contacto@adoacademiadigital.com</p>
-            <p><MapPin size={16} /> Ciudad, País</p>
-            <p><CalendarDays size={16} /> Lunes a sábado: 9:00 a. m. - 6:00 p. m.</p>
+            <h4>Contacto</h4>
+            <p>+00 000 000 000</p>
+            <p>contacto@adoacademiadigital.com</p>
+            <p>Ciudad, País</p>
+            <p>Lunes a sábado: 9:00 a.m. – 6:00 p.m.</p>
           </div>
         </div>
-        <div className="container footer-bottom"><span>© 2026 ADO Academia Digital. Todos los derechos reservados.</span><span>Política de privacidad | Términos y condiciones</span></div>
+        <div className="footer-bottom container">
+          <span>© {year} ADO Academia Digital. Todos los derechos reservados.</span>
+          <span>Política de privacidad | Términos y condiciones</span>
+        </div>
       </footer>
 
-      <a className="floating-whatsapp" href={whatsappLink('Hola, deseo recibir información de ADO Academia Digital.')} target="_blank" rel="noreferrer" aria-label="WhatsApp"><MessageCircle size={30} /></a>
+      <a className="floating-wa" href={whatsappLink('Hola, deseo información sobre ADO Academia Digital')} aria-label="WhatsApp">
+        <span>W</span>
+      </a>
     </main>
   );
 }
