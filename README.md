@@ -1,28 +1,35 @@
-# ADO Academia Digital - v4
+# ADO Academia Digital - v5
 
-Versión v4 de la landing informativa para ADO Academia Digital.
+Versión corregida usando el mockup aprobado como referencia principal.
 
-## Incluye
+## Qué incluye
 
-- Diseño más claro, médico, educativo y moderno.
-- Secciones con tonos diferentes para mejor contraste.
-- Logo integrado como elemento CSS para evitar la caja blanca del logo original.
-- Fondo animado sutil con formas dentales abstractas.
-- Imágenes integradas en `public/assets`.
+- Logo original convertido a PNG transparente para evitar la caja blanca.
+- Imágenes del mockup recortadas como assets separados:
+  - hero-main.jpg
+  - about-main.jpg
+  - course-ortodoncia.jpg
+  - course-implantes.jpg
+  - course-endodoncia.jpg
+  - course-estetica.jpg
+- Diseño claro, médico, educativo y moderno.
+- Secciones con contraste suave.
+- Header no sticky para evitar que aparezca encima de las secciones al hacer scroll.
 - Responsive real para móvil.
-- Formulario visual sin envío real.
-- Botones conectados a WhatsApp.
+- Fondo dental sutil animado.
+- Botones dirigidos a WhatsApp.
+- Formulario visual, sin backend.
 - Dockerfile listo para EasyPanel.
 
 ## Cambiar WhatsApp
 
-En `app/page.jsx`, cambiar:
+Editar en `app/page.jsx`:
 
 ```js
 const whatsappNumber = '000000000';
 ```
 
-por el número real en formato internacional, sin `+`.
+Usar formato internacional sin `+`.
 
 ## Desarrollo local
 
@@ -31,6 +38,6 @@ npm install
 npm run dev
 ```
 
-## Despliegue
+## Deploy
 
-Subir a GitHub y desplegar en EasyPanel usando Dockerfile.
+Subir el contenido del proyecto al repositorio GitHub y desplegar con Dockerfile en EasyPanel.
