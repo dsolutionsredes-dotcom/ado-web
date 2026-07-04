@@ -1,51 +1,14 @@
-# ADO Academia Digital - Next.js
+# ADO Academia Digital - Next.js (versión actualizada)
 
-Landing page informacional para ADO Academia Digital.
+Versión renovada de la web informacional de **ADO Academia Digital**, con:
 
-## Desarrollo local
-
-```bash
-npm install
-npm run dev
-```
-
-Abrir: http://localhost:3000
-
-## Build
-
-```bash
-npm run build
-npm start
-```
-
-## Docker
-
-```bash
-docker build -t ado-academia-digital .
-docker run -p 3000:3000 ado-academia-digital
-```
-
-## Subir a GitHub
-
-```bash
-git init
-git add .
-git commit -m "Initial ADO Academia Digital landing"
-git branch -M main
-git remote add origin https://github.com/TU-USUARIO/ado-academia-digital.git
-git push -u origin main
-```
-
-## EasyPanel
-
-1. Crear un repositorio en GitHub.
-2. Subir este proyecto al repositorio.
-3. En EasyPanel crear una nueva App desde GitHub.
-4. Seleccionar el repositorio.
-5. Tipo de despliegue: Dockerfile.
-6. Puerto interno: 3000.
-7. Build command: no hace falta si usa Dockerfile.
-8. Start command: no hace falta si usa Dockerfile.
+- diseño más claro, premium y profesional
+- inspiración estructural en la web de referencia indicada por el cliente
+- colores basados en el logo
+- imágenes reales/generadas para los cursos
+- formulario visual (por ahora no envía datos)
+- botones principales dirigidos a WhatsApp
+- Dockerfile listo para EasyPanel
 
 ## Cambiar WhatsApp
 
@@ -55,12 +18,36 @@ Editar en `app/page.jsx`:
 const whatsappNumber = '000000000';
 ```
 
-Poner el número real en formato internacional sin `+`, por ejemplo:
+Reemplazar por el número real en formato internacional sin `+`.
+
+Ejemplo:
 
 ```js
 const whatsappNumber = '51999999999';
 ```
 
-## Formulario
+## Desarrollo local
 
-Por ahora es demostrativo y no envía datos. El botón "Enviar solicitud" abre WhatsApp.
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+npm start
+```
+
+## Deploy en EasyPanel
+
+1. Subir el proyecto a GitHub.
+2. En EasyPanel conectar el repositorio.
+3. Usar tipo de despliegue: **Dockerfile**.
+4. Implementar.
+
+## Notas
+
+- Los textos de fechas, datos de contacto, estadísticas y algunos contenidos son temporales.
+- Las imágenes de cursos ya están integradas dentro de `public/assets`.
