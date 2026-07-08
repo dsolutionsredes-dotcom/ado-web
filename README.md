@@ -1,42 +1,45 @@
-# D-Solution Web - Fase 10
+# ADO Academia Digital - Next.js v7
 
-Incluye:
-- Diseño premium actual
-- Logo oficial como favicon y en navegación
-- Directus conectado
-- Portfolio y Blog dinámicos
-- Imágenes desde Directus
-- Chatwoot integrado
-- Botones activos desde Directus
-- Banner popup promocional desde Flex Sections
+Versión v7 con:
+- nuevas imágenes en alta calidad integradas en `public/assets`
+- hero sin marco, con imagen integrada y degradado visual
+- textos más equilibrados
+- header sticky
+- versión responsive para móvil
+- Dockerfile listo para EasyPanel
 
-## Botones activos
-En Directus > Home Page:
-- primary_button_action
-- secondary_button_action
+## Desarrollo local
 
-Valores recomendados:
-- section: ir a una sección, usando URL tipo #contacto
-- whatsapp: abrir WhatsApp
-- chat: abrir Chatwoot
-- external: abrir enlace externo
-- form: ir a contacto
+```bash
+npm install
+npm run dev
+```
 
-## Banner popup de promociones
-En Directus > Flex Sections crea un item:
-- section_type: promo_popup
-- title: título de promoción
-- subtitle: texto breve
-- content: texto adicional opcional
-- link_url: enlace de destino
-- link_text: texto del botón
-- image_url: URL de imagen opcional
-- is_published: activo
+## Build
 
-Si no existe un item promo_popup publicado, no aparece banner.
+```bash
+npm run build
+npm start
+```
 
-## Update: unified services and contact flow
-- Added `/servicios` overview page with the six service categories.
-- Unified header and footer across Home and service pages.
-- Added shared contact form to every service page, using the existing n8n webhook flow.
-- Added service dropdown navigation, clickable footer services, and improved floating WhatsApp button.
+## Cambiar WhatsApp
+
+Editar en `app/page.jsx`:
+
+```js
+const whatsappNumber = '000000000';
+```
+
+
+Ajustes extra en v7:
+- tipografías del hero más moderadas
+- espaciados más equilibrados
+- mismas imágenes de alta calidad ubicadas en cada sección
+
+
+## v8
+
+- Pantalla de carga inicial con logo ADO.
+- Duración aproximada: 1.8 segundos.
+- Entrada suave hacia la landing.
+- Dockerfile limpio sin package-lock para evitar caché de dependencias en EasyPanel.
