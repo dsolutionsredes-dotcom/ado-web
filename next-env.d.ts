@@ -1,18 +1,5 @@
-FROM node:20-alpine
+/// <reference types="next" />
+/// <reference types="next/image-types/global" />
 
-WORKDIR /app
-
-COPY package.json ./
-RUN npm install
-
-COPY . .
-
-RUN npm run build
-
-ENV NODE_ENV=production
-ENV PORT=80
-ENV HOSTNAME=0.0.0.0
-
-EXPOSE 80
-
-CMD ["npm", "run", "start"]
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/app/building-your-application/configuring/typescript for more information.
