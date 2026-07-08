@@ -1,45 +1,30 @@
-# ADO Academia Digital - Next.js v7
-
-Versión v7 con:
-- nuevas imágenes en alta calidad integradas en `public/assets`
-- hero sin marco, con imagen integrada y degradado visual
-- textos más equilibrados
-- header sticky
-- versión responsive para móvil
-- Dockerfile listo para EasyPanel
-
-## Desarrollo local
-
-```bash
-npm install
-npm run dev
-```
-
-## Build
-
-```bash
-npm run build
-npm start
-```
-
-## Cambiar WhatsApp
-
-Editar en `app/page.jsx`:
-
-```js
-const whatsappNumber = '000000000';
-```
-
-
-Ajustes extra en v7:
-- tipografías del hero más moderadas
-- espaciados más equilibrados
-- mismas imágenes de alta calidad ubicadas en cada sección
-
-
-## v8
-
-- Pantalla de carga inicial con logo ADO.
-- Duración aproximada: 1.8 segundos.
-- Entrada suave hacia la landing.
-- Dockerfile limpio sin package-lock para evitar caché de dependencias en EasyPanel.
+{
+  "name": "dsolution-web-fase5-premium",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@next/font": "latest",
+    "framer-motion": "11.18.2",
+    "lucide-react": "0.468.0",
+    "next": "14.2.23",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.17.10",
+    "@types/react": "18.3.18",
+    "@types/react-dom": "18.3.5",
+    "autoprefixer": "10.4.20",
+    "eslint": "8.57.1",
+    "eslint-config-next": "14.2.23",
+    "postcss": "8.4.49",
+    "tailwindcss": "3.4.17",
+    "typescript": "5.7.2"
+  }
+}
